@@ -140,7 +140,7 @@
         {
           "name": "rubber-duck-debugging",
           "file": "prompts/rubber-duck-debugging.md",
-          "description": "структурированный разбор бага «методом утёнка» — заставить себя"
+          "description": "структурированный разбор бага «методом утёнка» — заставить себя объяснить проблему по шагам, чтобы найти причину."
         }
       ]
     },
@@ -151,7 +151,7 @@
         {
           "name": "build-catalog",
           "file": "scripts/build-catalog.py",
-          "description": "сравниваем только items, дату игнорируем"
+          "description": "пересобирает catalog.json из файлов коллекции."
         },
         {
           "name": "new-item",
@@ -172,7 +172,7 @@
         {
           "name": "writing-good-skills",
           "file": "docs/writing-good-skills.md",
-          "description": "Конспект приёмов для качественных скиллов Claude Code (по мотивам публичных"
+          "description": "Конспект приёмов для качественных скиллов Claude Code (по мотивам публичных практик; сформулировано своими словами)."
         }
       ]
     }

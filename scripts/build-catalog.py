@@ -62,28 +62,56 @@ def _frontmatter(text: str) -> dict[str, str]:
     return fields
 
 
-def _first_text_line(text: str, skip_heading: bool = True) -> str:
+def _prompt_desc(text: str) -> str:
+    """Описание промпта: блок '> Назначение: ...' до строки '> Теги'/пустой."""
+    lines = text.splitlines()
+    parts: list[str] = []
+    started = False
+    for line in lines:
+        s = line.strip()
+        if not started:
+            if s.startswith(">") and re.search(r"Назначение:", s):
+                started = True
+                parts.append(re.sub(r"^>\s*Назначение:\s*", "", s))
+            continue
+        if not s.startswith(">"):
+            break
+        body = s.lstrip("> ").strip()
+        if body.startswith("Теги"):
+            break
+        parts.append(body)
+    return " ".join(parts).strip()
+
+
+def _first_paragraph(text: str) -> str:
+    """Первый текстовый абзац после заголовка (склеивает перенос строк)."""
+    parts: list[str] = []
     for line in text.splitlines():
         s = line.strip()
-        if not s:
-            continue
-        if skip_heading and s.startswith("#"):
-            continue
-        if s.startswith(">"):
-            s = s.lstrip("> ").strip()
-            s = re.sub(r"^Назначение:\s*", "", s)
-        return s
-    return ""
+        if not parts:
+            if not s or s.startswith("#"):
+                continue
+            parts.append(s)
+        else:
+            if not s:
+                break
+            parts.append(s)
+    return " ".join(parts).strip()
 
 
-def _comment_desc(text: str) -> str:
+def _script_desc(p: Path, text: str) -> str:
+    """Описание скрипта: docstring (.py) или первый комментарий (.sh)."""
+    if p.suffix == ".py":
+        m = re.search(r'"""(.*?)(?:\n|""")', text, re.S)
+        if m:
+            first = m.group(1).strip().splitlines()[0].strip()
+            return re.sub(r"^[\w.-]+\s*[—:-]\s*", "", first)
     for line in text.splitlines():
         s = line.strip()
         if s.startswith("#!"):
             continue
         if s.startswith("#"):
-            s = s.lstrip("# ").strip()
-            return re.sub(r"^[\w.-]+\s*[—:-]\s*", "", s)
+            return re.sub(r"^[\w.-]+\s*[—:-]\s*", "", s.lstrip("# ").strip())
     return ""
 
 
@@ -115,14 +143,16 @@ def collect_frontmatter_md(folder: str, use_name: bool) -> list[dict]:
     return out
 
 
-def collect_text_md(folder: str) -> list[dict]:
+def collect_text_md(folder: str, prompt_style: bool = False) -> list[dict]:
     out = []
     for p in sorted((ROOT / folder).glob("*.md")):
         if _is_template(p):
             continue
+        text = p.read_text(encoding="utf-8")
+        desc = _prompt_desc(text) if prompt_style else _first_paragraph(text)
         out.append({"name": p.stem,
                     "file": str(p.relative_to(ROOT)),
-                    "description": _first_text_line(p.read_text(encoding="utf-8"))})
+                    "description": desc})
     return out
 
 
@@ -135,7 +165,7 @@ def collect_scripts() -> list[dict]:
             continue
         out.append({"name": p.stem,
                     "file": str(p.relative_to(ROOT)),
-                    "description": _comment_desc(p.read_text(encoding="utf-8"))})
+                    "description": _script_desc(p, p.read_text(encoding="utf-8"))})
     return out
 
 
@@ -144,7 +174,7 @@ def build(existing: dict) -> dict:
     cats["skills"]["items"] = collect_skills()
     cats["agents"]["items"] = collect_frontmatter_md("agents", use_name=True)
     cats["commands"]["items"] = collect_frontmatter_md("commands", use_name=False)
-    cats["prompts"]["items"] = collect_text_md("prompts")
+    cats["prompts"]["items"] = collect_text_md("prompts", prompt_style=True)
     cats["docs"]["items"] = collect_text_md("docs")
     cats["scripts"]["items"] = collect_scripts()
     existing["updated"] = _dt.date.today().isoformat()
