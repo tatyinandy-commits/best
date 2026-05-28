@@ -2,13 +2,18 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "best",
   "description": "Личная коллекция инструментов для Claude Code.",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "updated": "2026-05-28",
   "categories": {
     "skills": {
       "path": "skills",
       "format": "directory with SKILL.md (YAML frontmatter: name, description)",
       "items": [
+        {
+          "name": "async-patterns",
+          "file": "skills/async-patterns/SKILL.md",
+          "description": "Use when the user has async/concurrent code with bugs — race conditions, deadlocks, improper await, leaked promises, or wrong error handling in async context. Also for reviewing async code for correctness."
+        },
         {
           "name": "changelog-from-commits",
           "file": "skills/changelog-from-commits/SKILL.md",
@@ -53,6 +58,11 @@
           "name": "env-diff",
           "file": "skills/env-diff/SKILL.md",
           "description": "Use when the user wants to compare environment configurations across envs (dev/staging/prod) — finding missing variables, value mismatches, or undocumented keys. Not for managing secrets storage."
+        },
+        {
+          "name": "git-archaeology",
+          "file": "skills/git-archaeology/SKILL.md",
+          "description": "Use when the user wants to understand why code looks the way it does — who changed it, why, when, and whether there are related commits or issues. Good for understanding intent before refactoring or fixing."
         },
         {
           "name": "git-bisect-run",
@@ -118,6 +128,11 @@
           "name": "proto-validate",
           "file": "skills/proto-validate/SKILL.md",
           "description": "Use when the user has Protocol Buffers (.proto) files and wants them checked — syntax, field numbering, breaking changes between versions, and buf lint best practices. Not for designing a gRPC service from scratch."
+        },
+        {
+          "name": "rate-limit-debug",
+          "file": "skills/rate-limit-debug/SKILL.md",
+          "description": "Use when an API is returning 429 errors or the user suspects rate limiting — identifying which limit was hit, calculating safe request rates, and implementing backoff. Not for bypassing legitimate rate limits."
         },
         {
           "name": "regex-craft",
@@ -221,6 +236,11 @@
           "description": "Делегируй, когда нужно написать, улучшить или отладить промпт для LLM — системный промпт, цепочку рассуждений, few-shot примеры, структуру вывода. Анализирует, почему промпт не работает, и предлагает улучшения."
         },
         {
+          "name": "qa-test-strategist",
+          "file": "agents/qa-test-strategist.md",
+          "description": "Делегируй, когда нужно спланировать тестовую стратегию для фичи или проекта — что тестировать вручную, что автоматизировать, тест-пирамида, рисковые зоны. Планирует, а не пишет тесты."
+        },
+        {
           "name": "refactor-planner",
           "file": "agents/refactor-planner.md",
           "description": "Делегируй, когда нужно спланировать рефакторинг легаси/запутанного кода: выявить запахи, предложить безопасные шаги малыми коммитами. Планирует, а не переписывает всё сразу."
@@ -261,6 +281,11 @@
       "path": "commands",
       "format": ".md (YAML frontmatter: description) + prompt body",
       "items": [
+        {
+          "name": "benchmark",
+          "file": "commands/benchmark.md",
+          "description": "Запускает простой бенчмарк функции/команды и сравнивает варианты."
+        },
         {
           "name": "check-types",
           "file": "commands/check-types.md",
@@ -420,6 +445,11 @@
           "description": "шаблон Architecture Decision Record для фиксации важных решений."
         },
         {
+          "name": "architecture-review",
+          "file": "prompts/architecture-review.md",
+          "description": "провести ревью архитектурного решения или системного дизайна с нескольких точек зрения перед реализацией."
+        },
+        {
           "name": "code-kata",
           "file": "prompts/code-kata.md",
           "description": "структурированная практика навыков через решение небольших задач с разбором и улучшением решения."
@@ -448,6 +478,11 @@
           "name": "incident-postmortem",
           "file": "prompts/incident-postmortem.md",
           "description": "каркас безвинного постмортема инцидента."
+        },
+        {
+          "name": "learning-plan",
+          "file": "prompts/learning-plan.md",
+          "description": "составить персональный план изучения технической темы с измеримыми результатами и конкретными ресурсами."
         },
         {
           "name": "onboarding-checklist",
