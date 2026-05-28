@@ -156,6 +156,34 @@ def collect_text_md(folder: str, prompt_style: bool = False) -> list[dict]:
     return out
 
 
+def collect_hooks() -> list[dict]:
+    out = []
+    for p in sorted((ROOT / "hooks").iterdir()):
+        if p.name.startswith("_template") or not p.is_file():
+            continue
+        if p.suffix not in (".sh", ".py"):
+            continue
+        out.append({"name": p.stem,
+                    "file": str(p.relative_to(ROOT)),
+                    "description": _script_desc(p, p.read_text(encoding="utf-8"))})
+    return out
+
+
+def collect_mcp() -> list[dict]:
+    out = []
+    for p in sorted((ROOT / "mcp").glob("*.json")):
+        if p.name.startswith("_template"):
+            continue
+        try:
+            cfg = json.loads(p.read_text(encoding="utf-8"))
+            servers = list(cfg.get("mcpServers", {}).keys())
+            desc = "MCP server: " + ", ".join(servers) if servers else ""
+        except Exception:
+            desc = ""
+        out.append({"name": p.stem, "file": str(p.relative_to(ROOT)), "description": desc})
+    return out
+
+
 def collect_scripts() -> list[dict]:
     out = []
     for p in sorted((ROOT / "scripts").glob("*")):
@@ -174,6 +202,8 @@ def build(existing: dict) -> dict:
     cats["skills"]["items"] = collect_skills()
     cats["agents"]["items"] = collect_frontmatter_md("agents", use_name=True)
     cats["commands"]["items"] = collect_frontmatter_md("commands", use_name=False)
+    cats["hooks"]["items"] = collect_hooks()
+    cats["mcp"]["items"] = collect_mcp()
     cats["prompts"]["items"] = collect_text_md("prompts", prompt_style=True)
     cats["docs"]["items"] = collect_text_md("docs")
     cats["scripts"]["items"] = collect_scripts()

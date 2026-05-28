@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "best",
   "description": "Личная коллекция инструментов для Claude Code.",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "updated": "2026-05-28",
   "categories": {
     "skills": {
@@ -15,9 +15,29 @@
           "description": "Use when the user wants a CHANGELOG or release notes generated from git history — summarizing commits since the last tag, grouping by type, and formatting for a release. Not for writing arbitrary prose docs."
         },
         {
+          "name": "ci-debug",
+          "file": "skills/ci-debug/SKILL.md",
+          "description": "Use when a CI/CD run is failing and the user wants the root cause found and fixed — parsing CI logs, identifying the first failure, and suggesting or applying a fix. Not for designing CI pipelines from scratch."
+        },
+        {
+          "name": "csv-transform",
+          "file": "skills/csv-transform/SKILL.md",
+          "description": "Use when the user wants to filter, reshape, join, or aggregate CSV/TSV data from the command line — slicing columns, computing stats, converting formats. Not for large-scale data pipelines (use a proper data tool for millions of rows)."
+        },
+        {
+          "name": "dead-code-hunter",
+          "file": "skills/dead-code-hunter/SKILL.md",
+          "description": "Use when the user wants a deeper dead code analysis than linting — tracing unreachable branches, deprecated feature flags, tombstoned experiments, or code paths that can never execute. Goes beyond unused variable warnings."
+        },
+        {
           "name": "dependency-audit",
           "file": "skills/dependency-audit/SKILL.md",
           "description": "Use when the user wants to audit project dependencies for known vulnerabilities, outdated versions, or unused packages — across npm, pip, cargo, or go modules. Not for adding new dependencies."
+        },
+        {
+          "name": "docker-compose-check",
+          "file": "skills/docker-compose-check/SKILL.md",
+          "description": "Use when the user wants a docker-compose.yml reviewed — checking service health checks, dependency ordering, volume mounts, port conflicts, and production-readiness issues. Not for writing compose from scratch."
         },
         {
           "name": "dockerfile-review",
@@ -25,9 +45,24 @@
           "description": "Use when the user wants a Dockerfile reviewed or slimmed — reducing image size, improving layer caching, and fixing security issues. Not for authoring Kubernetes manifests or compose orchestration."
         },
         {
+          "name": "env-diff",
+          "file": "skills/env-diff/SKILL.md",
+          "description": "Use when the user wants to compare environment configurations across envs (dev/staging/prod) — finding missing variables, value mismatches, or undocumented keys. Not for managing secrets storage."
+        },
+        {
           "name": "git-bisect-run",
           "file": "skills/git-bisect-run/SKILL.md",
           "description": "Use when the user wants to find the commit that introduced a bug using git bisect — ideally automated with a test command. Not for reverting or cherry-picking commits."
+        },
+        {
+          "name": "git-history-clean",
+          "file": "skills/git-history-clean/SKILL.md",
+          "description": "Use when the user wants to clean up a messy branch before merging — squashing fixup commits, reordering, splitting, or rewriting messages with interactive rebase. Not for rewriting shared/published history."
+        },
+        {
+          "name": "i18n-extract",
+          "file": "skills/i18n-extract/SKILL.md",
+          "description": "Use when the user wants to extract hardcoded strings from UI code for internationalization — finding untranslated literals, wrapping them in i18n calls, and generating translation keys. Not for translating content."
         },
         {
           "name": "json-wrangler",
@@ -35,9 +70,19 @@
           "description": "Use when the user wants to query, filter, reshape, or validate JSON data — building jq expressions or extracting fields from API responses. Not for designing JSON schemas from scratch."
         },
         {
+          "name": "load-test-plan",
+          "file": "skills/load-test-plan/SKILL.md",
+          "description": "Use when the user wants to plan or write a basic load test — defining scenarios, thresholds, and running k6/locust/ab. Not for full performance engineering or capacity planning at scale."
+        },
+        {
           "name": "log-triage",
           "file": "skills/log-triage/SKILL.md",
           "description": "Use when the user has a log file, stack trace, or error output and wants it triaged — grouping errors, finding the first/root failure, and summarizing what happened. Not for adding logging to code."
+        },
+        {
+          "name": "openapi-lint",
+          "file": "skills/openapi-lint/SKILL.md",
+          "description": "Use when the user has an OpenAPI/Swagger spec (YAML or JSON) and wants it validated for correctness, consistency, and common API design issues — missing descriptions, broken refs, inconsistent error schemas. Not for generating an OpenAPI spec from scratch."
         },
         {
           "name": "pdf-extract",
@@ -55,6 +100,16 @@
           "description": "Use when the user is preparing a release and wants a pre-release verification run — version bump, changelog, tests, build, tag. Not for setting up CI/CD pipelines from scratch."
         },
         {
+          "name": "schema-validate",
+          "file": "skills/schema-validate/SKILL.md",
+          "description": "Use when the user wants to validate data against a JSON Schema, Zod, Pydantic, or similar schema — checking conformance, generating test fixtures, or identifying schema gaps. Not for designing the schema itself."
+        },
+        {
+          "name": "secret-scan",
+          "file": "skills/secret-scan/SKILL.md",
+          "description": "Use when the user wants to find secrets, credentials, or sensitive values accidentally committed to source code or present in the working tree — API keys, passwords, tokens, private keys. Not for auditing runtime env vars."
+        },
+        {
           "name": "sql-optimize",
           "file": "skills/sql-optimize/SKILL.md",
           "description": "Use when the user has a slow SQL query and wants it analyzed and optimized — reading the query plan, suggesting indexes, and rewriting for performance. Not for designing a schema from scratch."
@@ -66,9 +121,19 @@
       "format": ".md (YAML frontmatter: name, description) + system prompt",
       "items": [
         {
+          "name": "accessibility-reviewer",
+          "file": "agents/accessibility-reviewer.md",
+          "description": "Делегируй, когда нужно проверить UI/HTML-код на доступность (a11y) — ARIA, семантика, навигация с клавиатуры, контраст, альты. Возвращает конкретные находки с WCAG-ссылками."
+        },
+        {
           "name": "api-designer",
           "file": "agents/api-designer.md",
           "description": "Делегируй, когда нужно спроектировать контракт API (REST/HTTP): ресурсы, методы, схемы запросов/ответов, коды ошибок, версионирование. Проектирует контракт, а не реализацию."
+        },
+        {
+          "name": "code-explainer",
+          "file": "agents/code-explainer.md",
+          "description": "Делегируй, когда нужно разобраться в чужом/незнакомом коде — понять архитектуру, поток данных, инварианты или неочевидные решения. Даёт объяснение на нужном уровне абстракции."
         },
         {
           "name": "code-reviewer",
@@ -81,9 +146,29 @@
           "description": "Делегируй, когда нужно спроектировать схему БД: сущности, связи, ключи, нормализацию, индексы и стратегию миграций. Проектирует модель данных, а не пишет приложение."
         },
         {
+          "name": "db-query-explainer",
+          "file": "agents/db-query-explainer.md",
+          "description": "Делегируй, когда нужно объяснить план выполнения запроса (EXPLAIN/EXPLAIN ANALYZE) простым языком — что делает каждый узел, где узкое место и почему оптимизатор выбрал именно этот план."
+        },
+        {
+          "name": "migration-guide-writer",
+          "file": "agents/migration-guide-writer.md",
+          "description": "Делегируй, когда нужно написать руководство по миграции между версиями API, библиотеки или сервиса — breaking changes, шаги замены, примеры «было/стало». Ориентируется на разработчика, а не на внутреннюю документацию."
+        },
+        {
+          "name": "onboarding-guide-writer",
+          "file": "agents/onboarding-guide-writer.md",
+          "description": "Делегируй, когда нужно написать или обновить гайд по онбордингу в проект — от настройки окружения до первого PR. Ориентируется на нового разработчика, читающего CONTRIBUTING.md или README впервые."
+        },
+        {
           "name": "perf-profiler",
           "file": "agents/perf-profiler.md",
           "description": "Делегируй, когда нужно найти причину медленной работы кода: горячие пути, лишние аллокации, N+1 запросы, неудачные алгоритмы. Сначала измеряет, потом предлагает оптимизацию."
+        },
+        {
+          "name": "prompt-engineer",
+          "file": "agents/prompt-engineer.md",
+          "description": "Делегируй, когда нужно написать, улучшить или отладить промпт для LLM — системный промпт, цепочку рассуждений, few-shot примеры, структуру вывода. Анализирует, почему промпт не работает, и предлагает улучшения."
         },
         {
           "name": "refactor-planner",
@@ -94,6 +179,11 @@
           "name": "security-auditor",
           "file": "agents/security-auditor.md",
           "description": "Делегируй, когда нужно проверить код/конфиг на типичные уязвимости и небезопасные практики (инъекции, секреты, авторизация, небезопасные дефолты). Возвращает находки с severity, не эксплойты."
+        },
+        {
+          "name": "sprint-retro-facilitator",
+          "file": "agents/sprint-retro-facilitator.md",
+          "description": "Делегируй, когда нужно провести или подготовить ретроспективу спринта — структурировать обратную связь, сформулировать action items, избежать переходов на личности."
         },
         {
           "name": "tech-doc-writer",
@@ -112,9 +202,29 @@
       "format": ".md (YAML frontmatter: description) + prompt body",
       "items": [
         {
+          "name": "check-types",
+          "file": "commands/check-types.md",
+          "description": "Запускает проверку типов и суммирует ошибки по файлам и категориям."
+        },
+        {
           "name": "commit",
           "file": "commands/commit.md",
           "description": "Создаёт аккуратный Conventional Commit из текущих staged-изменений."
+        },
+        {
+          "name": "dead-code",
+          "file": "commands/dead-code.md",
+          "description": "Находит неиспользуемые функции, переменные, импорты и экспорты в кодовой базе."
+        },
+        {
+          "name": "diff-stats",
+          "file": "commands/diff-stats.md",
+          "description": "Показывает статистику изменений по файлам в текущем diff или диапазоне."
+        },
+        {
+          "name": "env-check",
+          "file": "commands/env-check.md",
+          "description": "Проверяет наличие всех переменных окружения из .env.example в текущем окружении."
         },
         {
           "name": "explain-code",
@@ -125,6 +235,16 @@
           "name": "find-todos",
           "file": "commands/find-todos.md",
           "description": "Собирает TODO/FIXME/HACK по кодовой базе с контекстом и приоритетом."
+        },
+        {
+          "name": "git-undo",
+          "file": "commands/git-undo.md",
+          "description": "Безопасно отменяет последнее действие в git с диагностикой и выбором метода."
+        },
+        {
+          "name": "lint-fix",
+          "file": "commands/lint-fix.md",
+          "description": "Запускает автоматический lint и форматирование файлов, затем показывает что изменилось."
         },
         {
           "name": "review-diff",
@@ -142,6 +262,11 @@
           "description": "Кратко резюмирует изменения PR/ветки для ревьюера."
         },
         {
+          "name": "version-bump",
+          "file": "commands/version-bump.md",
+          "description": "Поднимает версию в манифесте проекта по semver и обновляет CHANGELOG."
+        },
+        {
           "name": "write-tests",
           "file": "commands/write-tests.md",
           "description": "Пишет автотесты для указанного файла/функции в стиле проекта."
@@ -151,12 +276,44 @@
     "hooks": {
       "path": "hooks",
       "format": "executable script wired via settings.json",
-      "items": []
+      "items": [
+        {
+          "name": "pre-commit-lint",
+          "file": "hooks/pre-commit-lint.sh",
+          "description": "pre-commit-lint (PreToolUse — Bash)"
+        },
+        {
+          "name": "session-start",
+          "file": "hooks/session-start.sh",
+          "description": "session-start"
+        }
+      ]
     },
     "mcp": {
       "path": "mcp",
       "format": "JSON config with mcpServers entry",
-      "items": []
+      "items": [
+        {
+          "name": "brave-search",
+          "file": "mcp/brave-search.json",
+          "description": "MCP server: brave-search"
+        },
+        {
+          "name": "filesystem",
+          "file": "mcp/filesystem.json",
+          "description": "MCP server: filesystem"
+        },
+        {
+          "name": "github",
+          "file": "mcp/github.json",
+          "description": "MCP server: github"
+        },
+        {
+          "name": "postgres",
+          "file": "mcp/postgres.json",
+          "description": "MCP server: postgres"
+        }
+      ]
     },
     "prompts": {
       "path": "prompts",
@@ -166,6 +323,16 @@
           "name": "adr-template",
           "file": "prompts/adr-template.md",
           "description": "шаблон Architecture Decision Record для фиксации важных решений."
+        },
+        {
+          "name": "code-review-checklist",
+          "file": "prompts/code-review-checklist.md",
+          "description": "персональный чек-лист для ревью чужого кода — чтобы ничего не пропустить и давать систематическую обратную связь."
+        },
+        {
+          "name": "design-doc",
+          "file": "prompts/design-doc.md",
+          "description": "каркас технического дизайн-документа для новой фичи или системы."
         },
         {
           "name": "estimation-breakdown",
@@ -178,6 +345,16 @@
           "description": "каркас безвинного постмортема инцидента."
         },
         {
+          "name": "onboarding-checklist",
+          "file": "prompts/onboarding-checklist.md",
+          "description": "чек-лист онбординга нового разработчика в проект — от клонирования до первого PR."
+        },
+        {
+          "name": "pair-programming-guide",
+          "file": "prompts/pair-programming-guide.md",
+          "description": "использовать Claude как напарника при парном программировании — в режиме «водитель/штурман» для сложных задач."
+        },
+        {
           "name": "pr-description",
           "file": "prompts/pr-description.md",
           "description": "сгенерировать чёткое описание pull request из diff/коммитов."
@@ -186,6 +363,16 @@
           "name": "rubber-duck-debugging",
           "file": "prompts/rubber-duck-debugging.md",
           "description": "структурированный разбор бага «методом утёнка» — заставить себя объяснить проблему по шагам, чтобы найти причину."
+        },
+        {
+          "name": "scope-creep-guard",
+          "file": "prompts/scope-creep-guard.md",
+          "description": "удержать задачу в рамках и не уйти в scope creep при добавлении функциональности."
+        },
+        {
+          "name": "technical-interview-prep",
+          "file": "prompts/technical-interview-prep.md",
+          "description": "подготовка к техническому интервью по конкретной теме или роли."
         },
         {
           "name": "user-story-splitter",
@@ -218,6 +405,16 @@
           "name": "best-practices",
           "file": "docs/best-practices.md",
           "description": "Краткие рекомендации по наполнению коллекции."
+        },
+        {
+          "name": "hooks-guide",
+          "file": "docs/hooks-guide.md",
+          "description": "Практическое руководство по написанию хуков для Claude Code (claude-code hooks)."
+        },
+        {
+          "name": "mcp-server-guide",
+          "file": "docs/mcp-server-guide.md",
+          "description": "Практические советы по конфигурации и использованию MCP (Model Context Protocol) в Claude Code."
         },
         {
           "name": "writing-good-skills",
