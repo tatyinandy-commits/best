@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "best",
   "description": "Личная коллекция инструментов для Claude Code.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "updated": "2026-05-28",
   "categories": {
     "skills": {
@@ -10,24 +10,34 @@
       "format": "directory with SKILL.md (YAML frontmatter: name, description)",
       "items": [
         {
-          "name": "pdf-extract",
-          "file": "skills/pdf-extract/SKILL.md",
-          "description": "Извлечение текста, таблиц и метаданных из PDF."
-        },
-        {
           "name": "changelog-from-commits",
           "file": "skills/changelog-from-commits/SKILL.md",
-          "description": "Сборка changelog/release notes из истории git."
+          "description": "Use when the user wants a CHANGELOG or release notes generated from git history — summarizing commits since the last tag, grouping by type, and formatting for a release. Not for writing arbitrary prose docs."
         },
         {
           "name": "dependency-audit",
           "file": "skills/dependency-audit/SKILL.md",
-          "description": "Аудит зависимостей на уязвимости и устаревание."
+          "description": "Use when the user wants to audit project dependencies for known vulnerabilities, outdated versions, or unused packages — across npm, pip, cargo, or go modules. Not for adding new dependencies."
+        },
+        {
+          "name": "git-bisect-run",
+          "file": "skills/git-bisect-run/SKILL.md",
+          "description": "Use when the user wants to find the commit that introduced a bug using git bisect — ideally automated with a test command. Not for reverting or cherry-picking commits."
+        },
+        {
+          "name": "json-wrangler",
+          "file": "skills/json-wrangler/SKILL.md",
+          "description": "Use when the user wants to query, filter, reshape, or validate JSON data — building jq expressions or extracting fields from API responses. Not for designing JSON schemas from scratch."
         },
         {
           "name": "log-triage",
           "file": "skills/log-triage/SKILL.md",
-          "description": "Триаж логов и трейсов, поиск первопричины."
+          "description": "Use when the user has a log file, stack trace, or error output and wants it triaged — grouping errors, finding the first/root failure, and summarizing what happened. Not for adding logging to code."
+        },
+        {
+          "name": "pdf-extract",
+          "file": "skills/pdf-extract/SKILL.md",
+          "description": "Use when the user wants to pull text, tables, or metadata out of a PDF file — extracting content, converting a PDF to markdown/text, or scraping fields from invoices/reports. Not for generating or editing PDFs."
         }
       ]
     },
@@ -38,27 +48,32 @@
         {
           "name": "code-reviewer",
           "file": "agents/code-reviewer.md",
-          "description": "Ревью diff на корректность, безопасность и читаемость."
+          "description": "Делегируй, когда нужно отревьюить diff или набор изменений на корректность, баги, безопасность и читаемость. Возвращает приоритизированные находки, а не переписывает код."
         },
         {
-          "name": "test-writer",
-          "file": "agents/test-writer.md",
-          "description": "Написание автотестов под фреймворк проекта."
-        },
-        {
-          "name": "tech-doc-writer",
-          "file": "agents/tech-doc-writer.md",
-          "description": "Написание и обновление технической документации."
-        },
-        {
-          "name": "security-auditor",
-          "file": "agents/security-auditor.md",
-          "description": "Поиск типичных уязвимостей и небезопасных практик."
+          "name": "perf-profiler",
+          "file": "agents/perf-profiler.md",
+          "description": "Делегируй, когда нужно найти причину медленной работы кода: горячие пути, лишние аллокации, N+1 запросы, неудачные алгоритмы. Сначала измеряет, потом предлагает оптимизацию."
         },
         {
           "name": "refactor-planner",
           "file": "agents/refactor-planner.md",
-          "description": "Поэтапный безопасный план рефакторинга."
+          "description": "Делегируй, когда нужно спланировать рефакторинг легаси/запутанного кода: выявить запахи, предложить безопасные шаги малыми коммитами. Планирует, а не переписывает всё сразу."
+        },
+        {
+          "name": "security-auditor",
+          "file": "agents/security-auditor.md",
+          "description": "Делегируй, когда нужно проверить код/конфиг на типичные уязвимости и небезопасные практики (инъекции, секреты, авторизация, небезопасные дефолты). Возвращает находки с severity, не эксплойты."
+        },
+        {
+          "name": "tech-doc-writer",
+          "file": "agents/tech-doc-writer.md",
+          "description": "Делегируй, когда нужно написать или обновить техническую документацию: README, гайд по API, how-to. Подстраивается под аудиторию и существующий стиль доков."
+        },
+        {
+          "name": "test-writer",
+          "file": "agents/test-writer.md",
+          "description": "Делегируй, когда нужно написать или дополнить автотесты для функции, модуля или бага. Подбирает фреймворк проекта, покрывает краевые случаи, не меняет продакшн-код без необходимости."
         }
       ]
     },
@@ -69,22 +84,27 @@
         {
           "name": "commit",
           "file": "commands/commit.md",
-          "description": "Conventional Commit из staged-изменений."
-        },
-        {
-          "name": "review-diff",
-          "file": "commands/review-diff.md",
-          "description": "Ревью текущего diff."
-        },
-        {
-          "name": "write-tests",
-          "file": "commands/write-tests.md",
-          "description": "Тесты для указанного файла/функции."
+          "description": "Создаёт аккуратный Conventional Commit из текущих staged-изменений."
         },
         {
           "name": "explain-code",
           "file": "commands/explain-code.md",
-          "description": "Объяснение кода по уровням абстракции."
+          "description": "Объясняет, что делает указанный код, по уровням абстракции."
+        },
+        {
+          "name": "review-diff",
+          "file": "commands/review-diff.md",
+          "description": "Ревью текущего diff на баги, безопасность и читаемость."
+        },
+        {
+          "name": "scaffold-test-file",
+          "file": "commands/scaffold-test-file.md",
+          "description": "Создаёт скелет тестового файла под целевой модуль в стиле проекта."
+        },
+        {
+          "name": "write-tests",
+          "file": "commands/write-tests.md",
+          "description": "Пишет автотесты для указанного файла/функции в стиле проекта."
         }
       ]
     },
@@ -103,19 +123,24 @@
       "format": "free-form markdown",
       "items": [
         {
-          "name": "rubber-duck-debugging",
-          "file": "prompts/rubber-duck-debugging.md",
-          "description": "Пошаговый разбор бага методом утёнка."
-        },
-        {
-          "name": "pr-description",
-          "file": "prompts/pr-description.md",
-          "description": "Генерация описания PR из diff/коммитов."
+          "name": "estimation-breakdown",
+          "file": "prompts/estimation-breakdown.md",
+          "description": "разложить задачу на оцениваемые подзадачи и дать честную оценку."
         },
         {
           "name": "incident-postmortem",
           "file": "prompts/incident-postmortem.md",
-          "description": "Каркас безвинного постмортема инцидента."
+          "description": "каркас безвинного постмортема инцидента."
+        },
+        {
+          "name": "pr-description",
+          "file": "prompts/pr-description.md",
+          "description": "сгенерировать чёткое описание pull request из diff/коммитов."
+        },
+        {
+          "name": "rubber-duck-debugging",
+          "file": "prompts/rubber-duck-debugging.md",
+          "description": "структурированный разбор бага «методом утёнка» — заставить себя"
         }
       ]
     },
@@ -124,9 +149,14 @@
       "format": "bash utilities",
       "items": [
         {
+          "name": "build-catalog",
+          "file": "scripts/build-catalog.py",
+          "description": "сравниваем только items, дату игнорируем"
+        },
+        {
           "name": "new-item",
           "file": "scripts/new-item.sh",
-          "description": "Создаёт новый элемент коллекции (skill, agent, command, prompt) из шаблона."
+          "description": "создаёт новый элемент коллекции из шаблона."
         }
       ]
     },
@@ -137,12 +167,12 @@
         {
           "name": "best-practices",
           "file": "docs/best-practices.md",
-          "description": "Рекомендации по наполнению коллекции."
+          "description": "Краткие рекомендации по наполнению коллекции."
         },
         {
           "name": "writing-good-skills",
           "file": "docs/writing-good-skills.md",
-          "description": "Как писать качественные скиллы Claude Code."
+          "description": "Конспект приёмов для качественных скиллов Claude Code (по мотивам публичных"
         }
       ]
     }
