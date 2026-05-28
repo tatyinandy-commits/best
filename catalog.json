@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "best",
   "description": "Личная коллекция инструментов для Claude Code.",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "updated": "2026-05-28",
   "categories": {
     "skills": {
@@ -60,6 +60,11 @@
           "description": "Use when the user wants to clean up a messy branch before merging — squashing fixup commits, reordering, splitting, or rewriting messages with interactive rebase. Not for rewriting shared/published history."
         },
         {
+          "name": "graphql-validate",
+          "file": "skills/graphql-validate/SKILL.md",
+          "description": "Use when the user has a GraphQL schema or queries and wants them validated — syntax, type correctness, unused fields, N+1 patterns, or breaking changes between schema versions. Not for designing a GraphQL API from scratch."
+        },
+        {
           "name": "i18n-extract",
           "file": "skills/i18n-extract/SKILL.md",
           "description": "Use when the user wants to extract hardcoded strings from UI code for internationalization — finding untranslated literals, wrapping them in i18n calls, and generating translation keys. Not for translating content."
@@ -70,6 +75,11 @@
           "description": "Use when the user wants to query, filter, reshape, or validate JSON data — building jq expressions or extracting fields from API responses. Not for designing JSON schemas from scratch."
         },
         {
+          "name": "k8s-manifest-check",
+          "file": "skills/k8s-manifest-check/SKILL.md",
+          "description": "Use when the user has Kubernetes manifests (Deployment, Service, ConfigMap, etc.) and wants them reviewed for correctness, security, and best practices — resource limits, liveness probes, RBAC, image pinning. Not for generating manifests from scratch."
+        },
+        {
           "name": "load-test-plan",
           "file": "skills/load-test-plan/SKILL.md",
           "description": "Use when the user wants to plan or write a basic load test — defining scenarios, thresholds, and running k6/locust/ab. Not for full performance engineering or capacity planning at scale."
@@ -78,6 +88,16 @@
           "name": "log-triage",
           "file": "skills/log-triage/SKILL.md",
           "description": "Use when the user has a log file, stack trace, or error output and wants it triaged — grouping errors, finding the first/root failure, and summarizing what happened. Not for adding logging to code."
+        },
+        {
+          "name": "mock-data-gen",
+          "file": "skills/mock-data-gen/SKILL.md",
+          "description": "Use when the user needs realistic mock/fixture data for tests, demos, or local development — generating JSON, SQL inserts, or CSV matching a given schema or example. Not for generating production data."
+        },
+        {
+          "name": "monorepo-scope",
+          "file": "skills/monorepo-scope/SKILL.md",
+          "description": "Use when the user works in a monorepo and wants to identify which packages are affected by a change, run scoped commands, or understand the dependency graph between packages. Not for setting up a monorepo from scratch."
         },
         {
           "name": "openapi-lint",
@@ -113,6 +133,11 @@
           "name": "sql-optimize",
           "file": "skills/sql-optimize/SKILL.md",
           "description": "Use when the user has a slow SQL query and wants it analyzed and optimized — reading the query plan, suggesting indexes, and rewriting for performance. Not for designing a schema from scratch."
+        },
+        {
+          "name": "terraform-lint",
+          "file": "skills/terraform-lint/SKILL.md",
+          "description": "Use when the user has Terraform code and wants it checked — formatting, validation, security issues with tfsec/checkov, and module best practices. Not for designing infrastructure architecture."
         }
       ]
     },
@@ -149,6 +174,16 @@
           "name": "db-query-explainer",
           "file": "agents/db-query-explainer.md",
           "description": "Делегируй, когда нужно объяснить план выполнения запроса (EXPLAIN/EXPLAIN ANALYZE) простым языком — что делает каждый узел, где узкое место и почему оптимизатор выбрал именно этот план."
+        },
+        {
+          "name": "incident-commander",
+          "file": "agents/incident-commander.md",
+          "description": "Делегируй во время активного инцидента: координирует диагностику, предлагает следующий шаг, ведёт таймлайн и управляет коммуникацией. Помогает не паниковать и двигаться системно."
+        },
+        {
+          "name": "memory-profiler",
+          "file": "agents/memory-profiler.md",
+          "description": "Делегируй, когда нужно найти утечку памяти или избыточное потребление — heap dumps, allocation traces, циклические ссылки. Сначала измеряет, потом объясняет причину и предлагает фикс."
         },
         {
           "name": "migration-guide-writer",
@@ -247,6 +282,16 @@
           "description": "Запускает автоматический lint и форматирование файлов, затем показывает что изменилось."
         },
         {
+          "name": "parse-args",
+          "file": "commands/parse-args.md",
+          "description": "Добавляет правильный парсинг аргументов в bash-скрипт с --help, --dry-run и т.п."
+        },
+        {
+          "name": "profile-run",
+          "file": "commands/profile-run.md",
+          "description": "Запускает команду под профайлером и суммирует горячие пути."
+        },
+        {
           "name": "review-diff",
           "file": "commands/review-diff.md",
           "description": "Ревью текущего diff на баги, безопасность и читаемость."
@@ -277,6 +322,11 @@
       "path": "hooks",
       "format": "executable script wired via settings.json",
       "items": [
+        {
+          "name": "post-tool-logger",
+          "file": "hooks/post-tool-logger.sh",
+          "description": "post-tool-logger (PostToolUse)"
+        },
         {
           "name": "pre-commit-lint",
           "file": "hooks/pre-commit-lint.sh",
@@ -312,6 +362,16 @@
           "name": "postgres",
           "file": "mcp/postgres.json",
           "description": "MCP server: postgres"
+        },
+        {
+          "name": "puppeteer",
+          "file": "mcp/puppeteer.json",
+          "description": "MCP server: puppeteer"
+        },
+        {
+          "name": "sqlite",
+          "file": "mcp/sqlite.json",
+          "description": "MCP server: sqlite"
         }
       ]
     },
@@ -340,6 +400,11 @@
           "description": "разложить задачу на оцениваемые подзадачи и дать честную оценку."
         },
         {
+          "name": "feature-flag-lifecycle",
+          "file": "prompts/feature-flag-lifecycle.md",
+          "description": "управление жизненным циклом feature flag — от создания до удаления после полной раскатки."
+        },
+        {
           "name": "incident-postmortem",
           "file": "prompts/incident-postmortem.md",
           "description": "каркас безвинного постмортема инцидента."
@@ -358,6 +423,11 @@
           "name": "pr-description",
           "file": "prompts/pr-description.md",
           "description": "сгенерировать чёткое описание pull request из diff/коммитов."
+        },
+        {
+          "name": "refactoring-checklist",
+          "file": "prompts/refactoring-checklist.md",
+          "description": "системный чек-лист перед и после рефакторинга, чтобы не сломать поведение."
         },
         {
           "name": "rubber-duck-debugging",
@@ -401,6 +471,11 @@
       "path": "docs",
       "format": "markdown notes",
       "items": [
+        {
+          "name": "agent-design-patterns",
+          "file": "docs/agent-design-patterns.md",
+          "description": "Практические паттерны для создания эффективных агентов в коллекции."
+        },
         {
           "name": "best-practices",
           "file": "docs/best-practices.md",
