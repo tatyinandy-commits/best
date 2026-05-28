@@ -2,23 +2,71 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "best",
   "description": "Личная коллекция инструментов для Claude Code.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "updated": "2026-05-28",
   "categories": {
     "skills": {
       "path": "skills",
       "format": "directory with SKILL.md (YAML frontmatter: name, description)",
-      "items": []
+      "items": [
+        {
+          "name": "pdf-extract",
+          "file": "skills/pdf-extract/SKILL.md",
+          "description": "Извлечение текста, таблиц и метаданных из PDF."
+        },
+        {
+          "name": "changelog-from-commits",
+          "file": "skills/changelog-from-commits/SKILL.md",
+          "description": "Сборка changelog/release notes из истории git."
+        },
+        {
+          "name": "dependency-audit",
+          "file": "skills/dependency-audit/SKILL.md",
+          "description": "Аудит зависимостей на уязвимости и устаревание."
+        }
+      ]
     },
     "agents": {
       "path": "agents",
       "format": ".md (YAML frontmatter: name, description) + system prompt",
-      "items": []
+      "items": [
+        {
+          "name": "code-reviewer",
+          "file": "agents/code-reviewer.md",
+          "description": "Ревью diff на корректность, безопасность и читаемость."
+        },
+        {
+          "name": "test-writer",
+          "file": "agents/test-writer.md",
+          "description": "Написание автотестов под фреймворк проекта."
+        },
+        {
+          "name": "tech-doc-writer",
+          "file": "agents/tech-doc-writer.md",
+          "description": "Написание и обновление технической документации."
+        }
+      ]
     },
     "commands": {
       "path": "commands",
       "format": ".md (YAML frontmatter: description) + prompt body",
-      "items": []
+      "items": [
+        {
+          "name": "commit",
+          "file": "commands/commit.md",
+          "description": "Conventional Commit из staged-изменений."
+        },
+        {
+          "name": "review-diff",
+          "file": "commands/review-diff.md",
+          "description": "Ревью текущего diff."
+        },
+        {
+          "name": "write-tests",
+          "file": "commands/write-tests.md",
+          "description": "Тесты для указанного файла/функции."
+        }
+      ]
     },
     "hooks": {
       "path": "hooks",
@@ -33,7 +81,18 @@
     "prompts": {
       "path": "prompts",
       "format": "free-form markdown",
-      "items": []
+      "items": [
+        {
+          "name": "rubber-duck-debugging",
+          "file": "prompts/rubber-duck-debugging.md",
+          "description": "Пошаговый разбор бага методом утёнка."
+        },
+        {
+          "name": "pr-description",
+          "file": "prompts/pr-description.md",
+          "description": "Генерация описания PR из diff/коммитов."
+        }
+      ]
     },
     "scripts": {
       "path": "scripts",
@@ -54,6 +113,11 @@
           "name": "best-practices",
           "file": "docs/best-practices.md",
           "description": "Рекомендации по наполнению коллекции."
+        },
+        {
+          "name": "writing-good-skills",
+          "file": "docs/writing-good-skills.md",
+          "description": "Как писать качественные скиллы Claude Code."
         }
       ]
     }
