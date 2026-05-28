@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "best",
   "description": "Личная коллекция инструментов для Claude Code.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "updated": "2026-05-28",
   "categories": {
     "skills": {
@@ -23,6 +23,11 @@
           "name": "dependency-audit",
           "file": "skills/dependency-audit/SKILL.md",
           "description": "Аудит зависимостей на уязвимости и устаревание."
+        },
+        {
+          "name": "log-triage",
+          "file": "skills/log-triage/SKILL.md",
+          "description": "Триаж логов и трейсов, поиск первопричины."
         }
       ]
     },
@@ -44,6 +49,16 @@
           "name": "tech-doc-writer",
           "file": "agents/tech-doc-writer.md",
           "description": "Написание и обновление технической документации."
+        },
+        {
+          "name": "security-auditor",
+          "file": "agents/security-auditor.md",
+          "description": "Поиск типичных уязвимостей и небезопасных практик."
+        },
+        {
+          "name": "refactor-planner",
+          "file": "agents/refactor-planner.md",
+          "description": "Поэтапный безопасный план рефакторинга."
         }
       ]
     },
@@ -65,6 +80,11 @@
           "name": "write-tests",
           "file": "commands/write-tests.md",
           "description": "Тесты для указанного файла/функции."
+        },
+        {
+          "name": "explain-code",
+          "file": "commands/explain-code.md",
+          "description": "Объяснение кода по уровням абстракции."
         }
       ]
     },
@@ -91,6 +111,11 @@
           "name": "pr-description",
           "file": "prompts/pr-description.md",
           "description": "Генерация описания PR из diff/коммитов."
+        },
+        {
+          "name": "incident-postmortem",
+          "file": "prompts/incident-postmortem.md",
+          "description": "Каркас безвинного постмортема инцидента."
         }
       ]
     },
