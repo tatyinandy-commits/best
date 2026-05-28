@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "best",
+  "description": "Личная коллекция инструментов для Claude Code.",
+  "version": "0.1.0",
+  "updated": "2026-05-28",
+  "categories": {
+    "skills": {
+      "path": "skills",
+      "format": "directory with SKILL.md (YAML frontmatter: name, description)",
+      "items": []
+    },
+    "agents": {
+      "path": "agents",
+      "format": ".md (YAML frontmatter: name, description) + system prompt",
+      "items": []
+    },
+    "commands": {
+      "path": "commands",
+      "format": ".md (YAML frontmatter: description) + prompt body",
+      "items": []
+    },
+    "hooks": {
+      "path": "hooks",
+      "format": "executable script wired via settings.json",
+      "items": []
+    },
+    "mcp": {
+      "path": "mcp",
+      "format": "JSON config with mcpServers entry",
+      "items": []
+    },
+    "prompts": {
+      "path": "prompts",
+      "format": "free-form markdown",
+      "items": []
+    },
+    "scripts": {
+      "path": "scripts",
+      "format": "bash utilities",
+      "items": [
+        {
+          "name": "new-item",
+          "file": "scripts/new-item.sh",
+          "description": "Создаёт новый элемент коллекции (skill, agent, command, prompt) из шаблона."
+        }
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "format": "markdown notes",
+      "items": [
+        {
+          "name": "best-practices",
+          "file": "docs/best-practices.md",
+          "description": "Рекомендации по наполнению коллекции."
+        }
+      ]
+    }
+  }
+}
