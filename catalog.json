@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "best",
   "description": "Личная коллекция инструментов для Claude Code.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "updated": "2026-05-28",
   "categories": {
     "skills": {
@@ -48,6 +48,16 @@
           "name": "regex-craft",
           "file": "skills/regex-craft/SKILL.md",
           "description": "Use when the user wants to build, explain, or debug a regular expression — matching a pattern, extracting groups, or fixing a regex that misbehaves. Not for full parsing of nested/recursive grammars (use a real parser)."
+        },
+        {
+          "name": "release-checklist",
+          "file": "skills/release-checklist/SKILL.md",
+          "description": "Use when the user is preparing a release and wants a pre-release verification run — version bump, changelog, tests, build, tag. Not for setting up CI/CD pipelines from scratch."
+        },
+        {
+          "name": "sql-optimize",
+          "file": "skills/sql-optimize/SKILL.md",
+          "description": "Use when the user has a slow SQL query and wants it analyzed and optimized — reading the query plan, suggesting indexes, and rewriting for performance. Not for designing a schema from scratch."
         }
       ]
     },
@@ -64,6 +74,11 @@
           "name": "code-reviewer",
           "file": "agents/code-reviewer.md",
           "description": "Делегируй, когда нужно отревьюить diff или набор изменений на корректность, баги, безопасность и читаемость. Возвращает приоритизированные находки, а не переписывает код."
+        },
+        {
+          "name": "data-modeler",
+          "file": "agents/data-modeler.md",
+          "description": "Делегируй, когда нужно спроектировать схему БД: сущности, связи, ключи, нормализацию, индексы и стратегию миграций. Проектирует модель данных, а не пишет приложение."
         },
         {
           "name": "perf-profiler",
@@ -122,6 +137,11 @@
           "description": "Создаёт скелет тестового файла под целевой модуль в стиле проекта."
         },
         {
+          "name": "summarize-pr",
+          "file": "commands/summarize-pr.md",
+          "description": "Кратко резюмирует изменения PR/ветки для ревьюера."
+        },
+        {
           "name": "write-tests",
           "file": "commands/write-tests.md",
           "description": "Пишет автотесты для указанного файла/функции в стиле проекта."
@@ -166,6 +186,11 @@
           "name": "rubber-duck-debugging",
           "file": "prompts/rubber-duck-debugging.md",
           "description": "структурированный разбор бага «методом утёнка» — заставить себя объяснить проблему по шагам, чтобы найти причину."
+        },
+        {
+          "name": "user-story-splitter",
+          "file": "prompts/user-story-splitter.md",
+          "description": "разбить крупную пользовательскую историю на маленькие, ценные и независимо поставляемые истории."
         }
       ]
     },
