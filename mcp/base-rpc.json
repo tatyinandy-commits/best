@@ -1,0 +1,13 @@
+{
+  "_comment": "EVM/Base RPC MCP-сервер для чтения on-chain данных (балансы, события, supply). Замени имя пакета на используемый вами EVM MCP-сервер. Секреты — через переменные окружения.",
+  "mcpServers": {
+    "base-rpc": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-evm"],
+      "env": {
+        "EVM_RPC_URL": "${BASE_RPC_URL}",
+        "EVM_CHAIN_ID": "8453"
+      }
+    }
+  }
+}
