@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "best",
   "description": "Личная коллекция инструментов для Claude Code.",
-  "version": "1.0.0",
-  "updated": "2026-05-28",
+  "version": "1.1.0",
+  "updated": "2026-05-29",
   "categories": {
     "skills": {
       "path": "skills",
@@ -383,6 +383,26 @@
       "format": "executable script wired via settings.json",
       "items": [
         {
+          "name": "auto-format",
+          "file": "hooks/auto-format.sh",
+          "description": "auto-format (PostToolUse — Edit|Write)"
+        },
+        {
+          "name": "block-dangerous-commands",
+          "file": "hooks/block-dangerous-commands.sh",
+          "description": "block-dangerous-commands (PreToolUse — Bash)"
+        },
+        {
+          "name": "inject-context",
+          "file": "hooks/inject-context.sh",
+          "description": "inject-context (UserPromptSubmit)"
+        },
+        {
+          "name": "notify-on-stop",
+          "file": "hooks/notify-on-stop.sh",
+          "description": "notify-on-stop (Stop)"
+        },
+        {
           "name": "post-tool-logger",
           "file": "hooks/post-tool-logger.sh",
           "description": "post-tool-logger (PostToolUse)"
@@ -393,9 +413,29 @@
           "description": "pre-commit-lint (PreToolUse — Bash)"
         },
         {
+          "name": "protect-main-branch",
+          "file": "hooks/protect-main-branch.sh",
+          "description": "protect-main-branch (PreToolUse — Bash)"
+        },
+        {
+          "name": "protect-sensitive-files",
+          "file": "hooks/protect-sensitive-files.sh",
+          "description": "protect-sensitive-files (PreToolUse — Edit|Write)"
+        },
+        {
+          "name": "run-related-tests",
+          "file": "hooks/run-related-tests.sh",
+          "description": "run-related-tests (PostToolUse — Edit|Write)"
+        },
+        {
           "name": "session-start",
           "file": "hooks/session-start.sh",
           "description": "session-start"
+        },
+        {
+          "name": "webhook-notify",
+          "file": "hooks/webhook-notify.sh",
+          "description": "webhook-notify (Stop | Notification)"
         }
       ]
     },
